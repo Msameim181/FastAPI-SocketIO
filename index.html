@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat via Socket</title>
+    <script src="./node_modules/socket.io-client/dist/socket.io.js" type="module"></script>
+    <script src="./index.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        .chat-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        
+        .input-box {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        .input-box input[type="text"] {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .input-box button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .client {
+            text-align: right;
+            color: black;
+            padding: 5px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        
+        .ai {
+            text-align: left;
+            color: black;
+            padding: 5px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        .connectionButton {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        #connectionID {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #connectB {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        #disconnectB {
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .divider {
+            border-top: 1px solid #ccc;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body onload="fn()">
+    <div class="container">
+        <h1>Chat via Socket</h1>
+        <div>
+            Connection ID: <div id="connectionID"></div>
+        </div>
+        <div class="connectionButton">
+            <button id="connectB" onclick="connect()">Connect</button>
+            <button id="disconnectB" onclick="disconnect()">Disconnect</button>
+        </div>
+        <div class="chat-box" id="messages">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <div class="input-box">
+            <input type="text" id="chatInput" placeholder="Enter message" onkeydown="handleKeyDown(event)">
+            <button onclick="send()" type="submit">Send</button>
+        </div>
+    </div>
+</body>
+</html>
